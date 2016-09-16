@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Learn Real English";
+}
+@Scripts.Render("~/bundles/jquery")
+
+<div class="container-fluid">
+    <h1>Learn Real English</h1>
+    <div class="form-group">
+        <label class="control-label" for="inputFolder">Path to files of the Course</label>
+        <input type="text" id="inputFolder" name="inputFolder" class="form-control" value="@ViewBag.Path" />
+        <button type="button" class="btn btn-primary" id="btnFileList">Listar arquivos</button>
+    </div>
+    <p class="lead">If You Spend Just 1 Hour A Day With Our English Lessons, You Will Speak English Fluently <a href="http://learnrealenglish.com/" class="btn btn-primary btn-sm">Buy &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="list-group" id="dvFileList">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnFileList').on('click', function (e) {
+            e.preventDefault();
+            var dataPost = { path: $("inputFolder").val() };
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Files")',
+                data: dataPost,
+                dataType: "json",
+                success: function(result) {
+                    $('#dvFileList').html(result);
+                }
+            });
+        });
+    });
+</script>
