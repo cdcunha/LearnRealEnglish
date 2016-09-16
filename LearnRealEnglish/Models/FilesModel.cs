@@ -7,6 +7,9 @@ namespace LearnRealEnglish.Models
 {
     public class FilesModel
     {
-        public string Path { get; set; }
+        public string FilesPath { get; set; }
+        public string ErrorMessage { get; set; }
+        public List<string> Files { get; set; }
+        
     }
 }

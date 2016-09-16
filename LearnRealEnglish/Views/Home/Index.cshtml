@@ -1,38 +1,43 @@
-﻿@{
+﻿@model LearnRealEnglish.Models.FilesModel
+@{
     ViewBag.Title = "Learn Real English";
 }
 @Scripts.Render("~/bundles/jquery")
 
-<div class="container-fluid">
-    <h1>Learn Real English</h1>
-    <div class="form-group">
-        <label class="control-label" for="inputFolder">Path to files of the Course</label>
-        <input type="text" id="inputFolder" name="inputFolder" class="form-control" value="@ViewBag.Path" />
-        <button type="button" class="btn btn-primary" id="btnFileList">Listar arquivos</button>
+@using(Html.BeginForm("GetFiles", "Home", FormMethod.Post, new { id = "formFiles" }))
+{
+    @Html.AntiForgeryToken()
+    <p>@ViewBag.ErrorMessage</p>
+    <div class="container-fluid">
+        <h1>Learn Real English</h1>
+        <div class="form-group">
+            @Html.TextBoxFor(e => e.FilesPath, new { maxlength = 255, @class = "form-control focus", @placeholder = "Path Files of Course" })
+        </div>
+        <p><button type="submit" class="btn btn-primary" id="btnFileList">Listar arquivos</button></p>
+        <p class="lead">If You Spend Just 1 Hour A Day With Our English Lessons, You Will Speak English Fluently <a href="http://learnrealenglish.com/" class="btn btn-primary btn-sm">Buy &raquo;</a></p>
     </div>
-    <p class="lead">If You Spend Just 1 Hour A Day With Our English Lessons, You Will Speak English Fluently <a href="http://learnrealenglish.com/" class="btn btn-primary btn-sm">Buy &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="list-group" id="dvFileList">
+    <div class="row">
+        <div class="list-group" id="dvFileList">
+        </div>
     </div>
-</div>
+}
 
 <script>
     $(document).ready(function () {
         $('#btnFileList').on('click', function (e) {
             e.preventDefault();
-            var dataPost = { path: $("inputFolder").val() };
-
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("Files")',
-                data: dataPost,
-                dataType: "json",
-                success: function(result) {
-                    $('#dvFileList').html(result);
-                }
+            var form = document.getElementById("formFiles");
+            var data = $(form).serialize();
+            $.post(form.action, data, function (response, textStatus, jqXHR) {
+                response.forEach(function (entry) {
+                    $('#dvFileList').append(entry);
+                });
             });
         });
     });
+
+    function play(pdf, mp3) {
+        alert(mp3)
+    }
 </script>
