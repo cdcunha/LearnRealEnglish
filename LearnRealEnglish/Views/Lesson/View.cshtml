@@ -1,0 +1,37 @@
+﻿@model LearnRealEnglish.Models.LessonModel
+
+@{
+    ViewBag.Title = "Lesson";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+
+<h2>Lesson</h2>
+
+<div>
+    <h4>@Html.DisplayNameFor(e => e.Title)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PdfPathFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PdfPathFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mp3PathFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mp3PathFile)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

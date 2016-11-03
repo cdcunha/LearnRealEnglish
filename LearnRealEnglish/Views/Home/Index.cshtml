@@ -37,7 +37,9 @@
         });
     });
 
-    function play(pdf, mp3) {
-        alert(mp3)
+    function Play(pdf, mp3, name) {
+        $.post("OpenLesson", { "PdfPathFile": pdf, "Mp3PathFile": mp3, "Title": name }, function (response, textStatus, jqXHR) {
+            alert(response);
+        });
     }
 </script>

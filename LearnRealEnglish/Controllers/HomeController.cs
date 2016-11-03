@@ -54,7 +54,7 @@ namespace LearnRealEnglish.Controllers
 
                         if (Mp3Files.Count() > 0)
                         {
-                            string txtItem = "<a href=\"javascript:Play('{0}','{1}');\" class='list-group-item'>{2}</a>";
+                            string txtItem = "<a href=\"javascript:Play('{0}','{1}, {2}');\" class='list-group-item'>{2}</a>";
                             int j = 0;
                             for (int i = 0; i < PdfFiles.Count(); i++)
                             {
@@ -89,6 +89,14 @@ namespace LearnRealEnglish.Controllers
                 model.Files.Add("Call this method only by Ajax");
                 return Json(model.Files, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public JsonResult OpenLesson()
+        {
+
+
+            return Json("Ok", JsonRequestBehavior.AllowGet);
         }
     }
 }
